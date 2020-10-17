@@ -3,6 +3,8 @@ import threading
 from ClientHandler import ClientHandler
 
 
+DEBUG = true
+
 class Server(threading.Thread):
     clients = []
 
@@ -36,3 +38,13 @@ class Server(threading.Thread):
                                 + str(self.max_connections).encode('utf-8') + b')')
                 connection.close()
                 print("Rejected client trying to connect. Max connections reached!")
+
+    # Sends a message to all clients connected to the server
+    def broadcast(self, msg: str):
+        for client in self.clients:
+            client.send_msg(msg.encode('utf-8'))
+
+    def remove_client(self, client: ClientHandler):
+        self.clients.remove(client)
+        if DEBUG:
+            print("Remove a client from the servers clients.")

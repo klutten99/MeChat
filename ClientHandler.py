@@ -10,6 +10,9 @@ class ClientHandler(threading.Thread):
         print("Starting new Client Handler")
         self.start()
 
+    def send_msg(self, msg: str):
+        self.connection.send(msg.encode('utf-8'))
+
     def run(self):
         while 1:
             try:
@@ -20,6 +23,8 @@ class ClientHandler(threading.Thread):
             except ConnectionResetError:
                 self.connection.close()
                 print("Connection closed by client!")
+                self.server.remove_client(self)
                 return
         self.connection.close()
         print("Connection closed!")
+        self.server.remove_client(self)
