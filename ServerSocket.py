@@ -1,6 +1,7 @@
 import _thread
 import socket
 
+class test:
 PORT = 1337
 HOST = '127.0.0.1'
 MAX_CONNECTIONS = 3
