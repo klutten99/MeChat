@@ -1,2 +1,2 @@
-python ClientSocket.py
+python main.py
 PAUSE

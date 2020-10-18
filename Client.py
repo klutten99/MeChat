@@ -12,7 +12,9 @@ class Client:
         self.account = Account(input("Name: "), input("Username: "), input("Password: "))
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print("Connecting to host...")
         self.sock.connect((self.host, self.port))
+        print("Connected to host! (" + self.host + ":" + str(self.port) + ")")
 
         self.setup_account()
 

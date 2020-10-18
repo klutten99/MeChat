@@ -1,7 +1,7 @@
 import socket
 import threading
 
-from Server.ClientHandler import ClientHandler
+from ClientHandler import ClientHandler
 
 DEBUG = True
 
@@ -43,9 +43,9 @@ class Server(threading.Thread):
     # Sends a message to all clients connected to the server
     def broadcast(self, msg: str):
         for client in self.clients:
-            client.send_msg(msg.encode('utf-8'))
+            client.send_msg(msg)
 
     def remove_client(self, client: ClientHandler):
         self.clients.remove(client)
         if DEBUG:
-            print("Remove a client from the servers clients.")
+            print("Removed a client from the servers clients.")

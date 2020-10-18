@@ -16,9 +16,9 @@ class ClientHandler(threading.Thread):
     def run(self):
         while 1:
             try:
-                data = self.connection.recv(BUFFER_SIZE)
+                data = self.connection.recv(self.server.buffer_size)
                 if not data: break;
-                print(str(address) + data.decode("utf-8"))
+                print(str(self.address) + data.decode("utf-8"))
                 self.connection.send(b'Server: ' + data)
             except ConnectionResetError:
                 self.connection.close()
