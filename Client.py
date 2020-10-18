@@ -23,7 +23,7 @@ class Client:
         print("Client initiated!")
 
     def setup_account(self):
-        self.sock.send(Account.magic + str(self.account))
+        self.send_msg(Account.magic + str(self.account))
 
     def send_msg(self, msg: str):
         self.sock.send(msg.encode('utf-8'))
@@ -52,3 +52,5 @@ class MessageHandler(threading.Thread):
         while 1:
             message = self.client.sock.recv(self.client.buffer_size)
             print(message.decode('utf-8'))
+
+Client()

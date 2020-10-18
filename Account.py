@@ -2,7 +2,7 @@
 
 class Account:
     accounts = []
-    magic = b"%Account%:"
+    magic = "%Account%:"
 
     def __init__(self, name, username, password):
         self.name = name

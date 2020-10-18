@@ -32,6 +32,7 @@ class Server(threading.Thread):
                 client = ClientHandler(connection, address, self)
                 self.clients.append(client)
                 print(str(address) + " connected to the server.")
+                print("Room is " + str(len(self.clients)) + "/" + str(self.max_connections))
             else:
                 connection.send(b'Too many are connected to this server already! ('
                                 + str(len(self.clients)).encode('utf-8')
