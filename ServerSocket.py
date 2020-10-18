@@ -1,7 +1,6 @@
 import _thread
 import socket
 
-class test:
 PORT = 1337
 HOST = '127.0.0.1'
 MAX_CONNECTIONS = 3
@@ -37,6 +36,5 @@ def accept_connections():
         _thread.start_new_thread(log_conn, (conn,))
         print("Started new thread for connection")
         # conn.send(b'You have been connected!\n')
-#This is a test
 
 accept_connections()

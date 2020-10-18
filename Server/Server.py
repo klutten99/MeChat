@@ -1,9 +1,10 @@
 import socket
 import threading
-from ClientHandler import ClientHandler
 
+from Server.ClientHandler import ClientHandler
 
-DEBUG = true
+DEBUG = True
+
 
 class Server(threading.Thread):
     clients = []
