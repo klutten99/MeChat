@@ -50,3 +50,5 @@ class Server(threading.Thread):
         self.clients.remove(client)
         if DEBUG:
             print("Removed a client from the servers clients.")
+
+Server()

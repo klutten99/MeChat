@@ -18,13 +18,16 @@ class ClientHandler(threading.Thread):
             try:
                 data = self.connection.recv(self.server.buffer_size)
                 if not data: break;
-                print(str(self.address) + data.decode("utf-8"))
-                self.connection.send(b'Server: ' + data)
+                msg = str(self.address) + ":" + data.decode('utf-8')
+                self.server.broadcast(msg)  # send to all clients connected
+                print(msg)  # for server logging
             except ConnectionResetError:
                 self.connection.close()
+                self.server.broadcast(str(self.address) + " has disconnected.")
                 print("Connection closed by client!")
                 self.server.remove_client(self)
                 return
         self.connection.close()
+        self.server.broadcast(str(self.address) + " has disconnected.")
         print("Connection closed!")
         self.server.remove_client(self)

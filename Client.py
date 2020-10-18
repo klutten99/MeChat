@@ -33,6 +33,8 @@ class InputHandler(threading.Thread):
     def __init__(self, client: Client):
         threading.Thread.__init__(self)
         self.client = client
+        self.start()
+        print("Started input handler!")
 
     def run(self):
         while 1:
@@ -47,6 +49,8 @@ class MessageHandler(threading.Thread):
     def __init__(self, client: Client):
         threading.Thread.__init__(self)
         self.client = client
+        self.start()
+        print("Started message handler!")
 
     def run(self):
         while 1:
