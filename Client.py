@@ -9,7 +9,7 @@ class Client:
         self.port = port
         self.host = host
         self.buffer_size = buffer_size
-        self.account = Account(input("Name: "), input("Username: "), input("Password: "))
+        self.account = Account(input("Username: "), input("Password: "))
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print("Connecting to host...")
@@ -23,7 +23,7 @@ class Client:
         print("Client initiated!")
 
     def setup_account(self):
-        self.send_msg(Account.magic + str(self.account))
+        self.send_msg(str(self.account))
 
     def send_msg(self, msg: str):
         self.sock.send(msg.encode('utf-8'))
@@ -54,7 +54,12 @@ class MessageHandler(threading.Thread):
 
     def run(self):
         while 1:
-            message = self.client.sock.recv(self.client.buffer_size)
-            print(message.decode('utf-8'))
+            try:
+                message = self.client.sock.recv(self.client.buffer_size)
+                print(message.decode('utf-8'))
+            except ConnectionResetError:
+                print("Server closed connection!")
+                break
+
 
 Client()

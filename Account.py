@@ -2,18 +2,20 @@
 
 class Account:
     accounts = []
-    magic = "%Account%:"
 
-    def __init__(self, name, username, password):
-        self.name = name
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.accounts.append(self)
+        if self not in self.accounts:
+            self.accounts.append(self)
 
     def __str__(self):
-        return self.name + ":" + self.username + ":" + self.password
+        return self.username + ":" + self.password
 
 
-def load_accounts(self, file):
+def save_accounts(folder):
     pass
 
+
+def load_accounts(file):
+    pass
